@@ -8,9 +8,9 @@ class NetworkService{
   static const baseUrl = "65ace4a7adbd5aa31bdfb633.mockapi.io";
 
   // APIS
-  static String apiGetAllProducts = '/users';
-  static String apiDeleteProduct = '/users/';
-  static String apiUpdateProduct = '/users/';
+  static String apiGetAllUser = '/users';
+  static String apiDeleteUser = '/users/';
+  static String apiUpdateUser = '/users/';
 
 
 
