@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:learn_dio_service/models/deleted_user_model.dart';
 import 'package:learn_dio_service/pages/user_info.dart';
@@ -60,6 +62,19 @@ class _HomePageState extends State<HomePage> {
     }
     setState(() {});
 }
+
+  Future<void> deletingItem(String index)async{
+    String? result = await NetworkService.DELETE(NetworkService.apiDeleteUser, index);
+    if(result != null){
+      // deletedProduct = deletedProductFromJson(result);
+      // log(result);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("$index item was deleted")));
+      await getData();
+      setState(() {});
+    }else{
+      log("Null");
+    }
+  }
 
 @override
   void initState() {
@@ -165,10 +180,31 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                trailing: const Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.grey,
-              ),
+                trailing:  IconButton(
+                    onPressed: () async{
+                      await deletingItem(item.id);
+                    },
+                    icon: const Icon(Icons.delete,
+                      color: Colors.grey,
+                    )
+                ),
+                // Row(
+                //   children: [
+                //     const Icon(
+                //       Icons.arrow_forward_ios,
+                //       color: Colors.grey,
+                //     ),
+                //    const  SizedBox(width: 5),
+                //      IconButton(
+                //         onPressed: () async{
+                //           await deletingItem(item.id);
+                //         },
+                //         icon: const Icon(Icons.delete,
+                //           color: Colors.grey,
+                //         )
+                //     ),
+                //   ],
+                // ),
                 onLongPress: (){
                   // var item = userList[index];
                   updateNameController.text = item.name;
@@ -235,6 +271,8 @@ class _HomePageState extends State<HomePage> {
                 onTap: (){
                   getInfo(item);
                 },
+
+
               );
             },
             itemCount:  userModel?.length ?? 0,

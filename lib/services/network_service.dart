@@ -5,6 +5,7 @@ import 'package:learn_dio_service/services/dio_service.dart';
 
 class NetworkService{
 
+  //https://65ace4a7adbd5aa31bdfb633.mockapi.io/users
   static const baseUrl = "65ace4a7adbd5aa31bdfb633.mockapi.io";
 
   // APIS
